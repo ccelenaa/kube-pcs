@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    traefik.ingress.kubernetes.io/router.priority: "10"
+    traefik.ingress.kubernetes.io/router.middlewares: pcs-https@kubernetescrd #, pcs-pcsheaders@kubernetescrd
+    # traefik.ingress.kubernetes.io/preserve-host: "true"
+    # traefik.ingress.kubernetes.io/pass-tls-cert: "true"
+    # traefik.ingress.kubernetes.io/frontend-entry-points: "https"
+    # traefik.ingress.kubernetes.io/redirect-entry-point: "https"
+    # traefik.ingress.kubernetes.io/redirect-permanent: "true"
+    # ingress.kubernetes.io/ssl-redirect: "true"
+    # ingress.kubernetes.io/whitelist-x-forwarded-for: "true"
+    # ingress.kubernetes.io/content-security-policy: "default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://www.google.com"
+  name: ingress-api-pcs
+spec:
+  tls:
+  - secretName: sectlsu
+    hosts:
+    - "api.pcs.fr"
+  rules:
+  - host: "api.pcs.fr"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-pcs
+            port:
+              number: 80

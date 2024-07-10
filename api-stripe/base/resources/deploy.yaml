@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-stripe
+  labels:
+    app: api-stripe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-stripe
+  template:
+    metadata:
+      labels:
+        app: api-stripe
+    spec:
+      containers:
+      - name: api-stripe
+        image: docker.io/celenaaa/api-stripe:1.3.0
+        envFrom:
+        - configMapRef:
+            name: api-stripe-env
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: api-stripe-config
+          mountPath: /usr/lib/pcs/api-stripe/config
+          readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /liveness
+            port: 80
+          initialDelaySeconds: 10
+          timeoutSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 80
+          initialDelaySeconds: 10
+          timeoutSeconds: 3
+      volumes:
+      - name: api-stripe-config
+        configMap:
+          name: api-stripe-config

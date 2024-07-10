@@ -1,0 +1,36 @@
+# The domain name
+domain: 'paris-pcs.fr'
+
+# Server
+server:
+  host: '0.0.0.0'
+  port: 80
+
+# Token & Cookie
+cookie_name: 'token'
+jwt_secret: 'MY_SECRET'
+
+# Facturation
+cron:
+  facturation:
+    prestataires: '0 0 0 1 * *'
+
+# Payment
+payment:
+  host: http://api-stripe.pcs.svc.cluster.local
+  port: 80
+
+# Database
+databases:
+  postgres:
+    url: 'postgresql://pcs:pcs@postgres.pcs.svc.cluster.local:5432/pcs?schema=public'
+
+# Rabbitmq
+rabbitmq:
+  connection:
+    protocol: 'amqp'
+    hostname: 'rabbitmq.bleme.svc.cluster.local'
+    port:     5672
+    username: 'admin'
+    password: 'admin'
+    vhost:    'bleme'

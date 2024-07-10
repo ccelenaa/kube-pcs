@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-pcs
+  labels:
+    app: front-pcs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front-pcs
+  template:
+    metadata:
+      labels:
+        app: front-pcs
+    spec:
+      containers:
+      - name: front-pcs
+        image: docker.io/celenaaa/front-pcs:2.1.0
+        envFrom:
+        - configMapRef:
+            name: front-pcs-env
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        # - name: front-pcs-public
+        #   mountPath: /usr/lib/pcs/front-pcs/public
+        - name: front-pcs-env
+          mountPath: /usr/lib/pcs/front-pcs/public
+        - name: front-pcs-nginx-config
+          mountPath: /etc/nginx/conf.d
+          readOnly: true
+        # - name: front-pcs-tls-config
+        #   mountPath: /usr/lib/bleme/front-pcs/tls
+        #   readOnly: true
+      volumes:
+      - name: front-pcs-public
+        persistentVolumeClaim:
+          claimName: front-pcs-public-pvc
+      - name: front-pcs-nginx-config
+        configMap:
+          name: front-pcs-nginx-config
+      - name: front-pcs-env
+        configMap:
+          name: front-pcs-env
+      # - name: front-pcs-tls-config
+      #   configMap:
+      #     name: app-bleme-tls-config

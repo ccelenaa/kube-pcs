@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-pcs
+  labels:
+    app: api-pcs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-pcs
+  template:
+    metadata:
+      labels:
+        app: api-pcs
+    spec:
+      containers:
+      - name: api-pcs
+        image: docker.io/celenaaa/api-pcs:2.4.0
+        envFrom:
+        - configMapRef:
+            name: api-pcs-env
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: api-pcs-config
+          mountPath: /usr/lib/pcs/api-pcs/config
+          readOnly: true
+        - name: api-pcs-public-storage
+          mountPath: /usr/lib/pcs/api-pcs/public
+        livenessProbe:
+          httpGet:
+            path: /liveness
+            port: 80
+          initialDelaySeconds: 10
+          timeoutSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /readiness
+            port: 80
+          initialDelaySeconds: 10
+          timeoutSeconds: 3
+      volumes:
+      - name: api-pcs-config
+        configMap:
+          name: api-pcs-config
+      - name: api-pcs-public-storage
+        persistentVolumeClaim:
+          claimName: api-pcs-pvc
