@@ -1,15 +1,15 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: api-pcs-pv
+  name: pcs-public-pv
   labels:
     type: local
 spec:
   storageClassName: manual
   # volumeMode: Filesystem
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   hostPath:
-    path: "/mnt/pcs/api-pcs/public"
+    path: "/mnt/pcs/public"
   capacity:
     storage: 50Gi

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api-pcs
-        image: docker.io/celenaaa/api-pcs:2.4.0
+        image: docker.io/celenaaa/api-pcs:2.5.0
         envFrom:
         - configMapRef:
             name: api-pcs-env
@@ -46,4 +46,4 @@ spec:
           name: api-pcs-config
       - name: api-pcs-public-storage
         persistentVolumeClaim:
-          claimName: api-pcs-pvc
+          claimName: pcs-public-pvc

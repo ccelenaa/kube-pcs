@@ -16,17 +16,17 @@ spec:
     spec:
       containers:
       - name: front-pcs
-        image: docker.io/celenaaa/front-pcs:2.1.0
+        image: docker.io/celenaaa/front-pcs:3.0.0
         envFrom:
         - configMapRef:
             name: front-pcs-env
         ports:
         - containerPort: 80
         volumeMounts:
-        # - name: front-pcs-public
-        #   mountPath: /usr/lib/pcs/front-pcs/public
-        - name: front-pcs-env
+        - name: pcs-public
           mountPath: /usr/lib/pcs/front-pcs/public
+        - name: front-pcs-env
+          mountPath: /usr/lib/pcs/front-pcs/public/js
         - name: front-pcs-nginx-config
           mountPath: /etc/nginx/conf.d
           readOnly: true
@@ -34,9 +34,9 @@ spec:
         #   mountPath: /usr/lib/bleme/front-pcs/tls
         #   readOnly: true
       volumes:
-      - name: front-pcs-public
+      - name: pcs-public
         persistentVolumeClaim:
-          claimName: front-pcs-public-pvc
+          claimName: pcs-public-pvc
       - name: front-pcs-nginx-config
         configMap:
           name: front-pcs-nginx-config

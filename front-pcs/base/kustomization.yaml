@@ -15,8 +15,8 @@ resources:
 - resources/svc.yaml
 - resources/hpa.yaml
 - resources/deploy.yaml
-- resources/pv.yaml
-- resources/pvc.yaml
+# - resources/pv.yaml
+# - resources/pvc.yaml
 - resources/ing.yaml
 - resources/redirect.yaml
 - resources/hdr.yaml
