@@ -14,9 +14,16 @@ spec:
       labels:
         app: api-pcs
     spec:
+      # initContainers:
+      #   - name: init-myservice
+      #     image: busybox
+      #     command: ['sh', '-c', 'mkdir -p /mnt/data/']
+      #     volumeMounts:
+      #       - mountPath: "/mnt/data"
+      #         name: my-volume
       containers:
       - name: api-pcs
-        image: docker.io/celenaaa/api-pcs:2.5.0
+        image: docker.io/celenaaa/api-pcs:3.2.0
         envFrom:
         - configMapRef:
             name: api-pcs-env

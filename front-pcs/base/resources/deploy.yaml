@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: front-pcs
-        image: docker.io/celenaaa/front-pcs:3.0.0
+        image: docker.io/celenaaa/front-pcs:3.3.0
         envFrom:
         - configMapRef:
             name: front-pcs-env
