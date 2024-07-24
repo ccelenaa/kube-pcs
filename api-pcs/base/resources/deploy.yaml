@@ -23,6 +23,13 @@ spec:
       #         name: my-volume
       containers:
       - name: api-pcs
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
         image: docker.io/celenaaa/api-pcs:3.5.0
         envFrom:
         - configMapRef:

@@ -16,6 +16,13 @@ spec:
     spec:
       containers:
       - name: front-pcs
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
         image: docker.io/celenaaa/front-pcs:3.6.0
         envFrom:
         - configMapRef:

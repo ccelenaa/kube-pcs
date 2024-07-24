@@ -16,6 +16,13 @@ spec:
     spec:
       containers:
       - name: postgres
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
         image: postgres:15
         # command: ["sh"]
         # args: ["-c", "while true; do echo $(date -u) >> /tmp/run.log; sleep 5; done"]
