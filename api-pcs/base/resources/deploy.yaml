@@ -23,7 +23,7 @@ spec:
       #         name: my-volume
       containers:
       - name: api-pcs
-        image: docker.io/celenaaa/api-pcs:3.2.0
+        image: docker.io/celenaaa/api-pcs:3.5.0
         envFrom:
         - configMapRef:
             name: api-pcs-env
