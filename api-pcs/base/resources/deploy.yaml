@@ -30,7 +30,7 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "500m"
-        image: docker.io/celenaaa/api-pcs:3.5.0
+        image: docker.io/celenaaa/api-pcs:3.6.0
         envFrom:
         - configMapRef:
             name: api-pcs-env
