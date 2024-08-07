@@ -4,14 +4,14 @@ namespace: pcs
 resources:
 - ../../base
 # ---
-patches:
-- patch: |-
-    [
-      {"op": "replace", "path": "/spec/minReplicas", "value": 1},
-      {"op": "replace", "path": "/spec/maxReplicas", "value": 10}
-    ]
-  target:
-    kind: HorizontalPodAutoscaler
+# patches:
+# - patch: |-
+#     [
+#       {"op": "replace", "path": "/spec/minReplicas", "value": 1},
+#       {"op": "replace", "path": "/spec/maxReplicas", "value": 10}
+#     ]
+#   target:
+#     kind: HorizontalPodAutoscaler
 # ---
 generatorOptions:
   disableNameSuffixHash: true

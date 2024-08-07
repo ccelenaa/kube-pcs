@@ -23,7 +23,7 @@ spec:
           limits:
             memory: "256Mi"
             cpu: "500m"
-        image: docker.io/celenaaa/front-pcs:3.7.0
+        image: docker.io/celenaaa/front-pcs:4.6.0
         envFrom:
         - configMapRef:
             name: front-pcs-env
